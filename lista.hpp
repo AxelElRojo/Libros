@@ -1,5 +1,6 @@
 #pragma once
 #include <fstream>
+#include <vector>
 #include "libro.hpp"
 class cNodo{
     cLibro lDato;
@@ -32,8 +33,7 @@ class cLista{
     cLista(const cLibro& libro):cabeza(new cNodo(libro)){}
     cLista():cabeza(nullptr){}
     ~cLista(){
-        while(cabeza != nullptr)
-            eliminarInicio();
+        delete cabeza;
     }
     void insertar(const cLibro& libro){
         if(cabeza != nullptr)
@@ -67,5 +67,29 @@ class cLista{
             return true;
         }else
             return false;
+    }
+    void buscarTitulo(std::vector<cLibro>&resultados,const string& titulo) const{
+        cNodo* pIt = cabeza;
+        while (pIt != nullptr){
+            if(pIt->lDato.mostrarNombre() == titulo)
+                resultados.push_back(pIt->lDato);
+            pIt = pIt->siguiente;
+        }
+    }
+    void buscarAutor(std::vector<cLibro>&resultados,const string& autor) const{
+        cNodo* pIt = cabeza;
+        while (pIt != nullptr){
+            if(pIt->lDato.mostrarAutor() == autor)
+                resultados.push_back(pIt->lDato);
+            pIt = pIt->siguiente;
+        }
+    }
+    void buscarAnio(std::vector<cLibro>&resultados,const short& anio) const{
+        cNodo* pIt = cabeza;
+        while (pIt != nullptr){
+            if(pIt->lDato.mostrarAnio() == anio)
+                resultados.push_back(pIt->lDato);
+            pIt = pIt->siguiente;
+        }
     }
 };

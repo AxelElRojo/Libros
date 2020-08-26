@@ -4,18 +4,27 @@
 using std::string;
 class cLibro{
     string nombre, autor;
-    int anio, edicion;
+    short anio, edicion;
     friend class cNodo;
 public:
-    cLibro(string nombre, string autor, int anio, int edicion){
+    cLibro(string nombre, string autor, short anio, short edicion){
         ponerDatos(nombre, autor, anio, edicion);
     }
     cLibro():edicion(-1){}
-    void ponerDatos(string nombre, string autor, int anio, int edicion){
+    void ponerDatos(string nombre, string autor, short anio, short edicion){
         this->nombre = nombre;
         this->autor = autor;
         this->anio = anio;
         this->edicion = edicion;
+    }
+    string mostrarNombre() const{
+        return nombre;
+    }
+    string mostrarAutor() const{
+        return autor;
+    }
+    short mostrarAnio() const{
+        return anio;
     }
     string mostrarDatos() const{
         std::stringstream ss;

@@ -20,5 +20,6 @@ int main(){
             default:
                 std::cout << "Ingrese una opción válida!\n";
         }
+    pausa();
     }while(opc!=SALIR);
 }
