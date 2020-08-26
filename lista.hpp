@@ -8,18 +8,21 @@ class cNodo{
     friend class cLista;
     cNodo(const cLibro& libro):lDato(libro),siguiente(nullptr){}
     cNodo():siguiente(nullptr){}
-    void insertarAdelante(const cLibro& libro){
-        if(siguiente != nullptr)
-            siguiente->insertarAdelante(libro);
-        else
-            siguiente = new cNodo(libro);
-    }
-    void eliminarAdelante(){
-        cNodo* adelante = siguiente->siguiente;
-        delete siguiente;
-        siguiente = adelante;
-    }
+    ~cNodo(){delete siguiente;}
+    void insertarAdelante(const cLibro& libro);
+    void eliminarAdelante();
 };
+void cNodo::insertarAdelante(const cLibro& libro){
+    if(siguiente != nullptr)
+        siguiente->insertarAdelante(libro);
+    else
+        siguiente = new cNodo(libro);
+}
+void cNodo::eliminarAdelante(){
+    cNodo* adelante = siguiente->siguiente;
+    delete siguiente;
+    siguiente = adelante;
+}
 class cLista{
     cNodo* cabeza;
     cLibro eliminarInicio(){
@@ -32,64 +35,69 @@ class cLista{
     public:
     cLista(const cLibro& libro):cabeza(new cNodo(libro)){}
     cLista():cabeza(nullptr){}
-    ~cLista(){
-        delete cabeza;
-    }
-    void insertar(const cLibro& libro){
+    ~cLista(){delete cabeza;}
+    void insertar(const cLibro& libro);
+    bool estaVacia() const;
+    bool cargar();
+    bool guardar();
+    void buscarTitulo(std::vector<cLibro>&resultados,const string& titulo) const;
+    void buscarAutor(std::vector<cLibro>&resultados,const string& autor) const;
+    void buscarAnio(std::vector<cLibro>&resultados,const short& anio) const;
+};
+void cLista::insertar(const cLibro& libro){
         if(cabeza != nullptr)
             cabeza->insertarAdelante(libro);
         else
             cabeza = new cNodo(libro);
     }
-    bool estaVacia() const{
-        return cabeza == nullptr;
-    }
-    bool cargar(){
-        std::ifstream fin("LIBROS.db");
-        if(fin.is_open()){
-            while(!fin.eof()){
-                cLibro libro;
-                fin >> libro;
-                insertar(libro);
-            }
-            fin.close();
-            return true;
-        }else
-            return false;
-    }
-    bool guardar(){
-        std::ofstream fout("LIBROS.db");
-        if(fout.is_open()){
-            while(!estaVacia()){
-                fout << eliminarInicio();
-            }
-            fout.close();
-            return true;
-        }else
-            return false;
-    }
-    void buscarTitulo(std::vector<cLibro>&resultados,const string& titulo) const{
-        cNodo* pIt = cabeza;
-        while (pIt != nullptr){
-            if(pIt->lDato.mostrarNombre() == titulo)
-                resultados.push_back(pIt->lDato);
-            pIt = pIt->siguiente;
+bool cLista::estaVacia() const{
+    return cabeza == nullptr;
+}
+bool cLista::cargar(){
+    std::ifstream fin("/var/db/LIBROS.db");
+    if(fin.is_open()){
+        while(!fin.eof()){
+            cLibro libro;
+            fin >> libro;
+            insertar(libro);
         }
-    }
-    void buscarAutor(std::vector<cLibro>&resultados,const string& autor) const{
-        cNodo* pIt = cabeza;
-        while (pIt != nullptr){
-            if(pIt->lDato.mostrarAutor() == autor)
-                resultados.push_back(pIt->lDato);
-            pIt = pIt->siguiente;
+        fin.close();
+        return true;
+    }else
+        return false;
+}
+bool cLista::guardar(){
+    std::ofstream fout("/var/db/LIBROS.db");
+    if(fout.is_open()){
+        while(!estaVacia()){
+            fout << eliminarInicio();
         }
+        fout.close();
+        return true;
+    }else
+        return false;
+}
+void cLista::buscarTitulo(std::vector<cLibro>&resultados,const string& titulo) const{
+    cNodo* pIt = cabeza;
+    while (pIt != nullptr){
+        if(pIt->lDato.mostrarNombre() == titulo)
+            resultados.push_back(pIt->lDato);
+        pIt = pIt->siguiente;
     }
-    void buscarAnio(std::vector<cLibro>&resultados,const short& anio) const{
-        cNodo* pIt = cabeza;
-        while (pIt != nullptr){
-            if(pIt->lDato.mostrarAnio() == anio)
-                resultados.push_back(pIt->lDato);
-            pIt = pIt->siguiente;
-        }
+}
+void cLista::buscarAutor(std::vector<cLibro>&resultados,const string& autor) const{
+    cNodo* pIt = cabeza;
+    while (pIt != nullptr){
+        if(pIt->lDato.mostrarAutor() == autor)
+            resultados.push_back(pIt->lDato);
+        pIt = pIt->siguiente;
     }
-};
+}
+void cLista::buscarAnio(std::vector<cLibro>&resultados,const short& anio) const{
+    cNodo* pIt = cabeza;
+    while (pIt != nullptr){
+        if(pIt->lDato.mostrarAnio() == anio)
+            resultados.push_back(pIt->lDato);
+        pIt = pIt->siguiente;
+    }
+}

@@ -1,15 +1,13 @@
 #pragma once
 #include <cctype>
 #include <cstdlib>
-#include <iostream>
-#include <string>
 #include "lista.hpp"
 using std::cin;
 using std::cout;
 enum OPCIONES{ALTA=1,BUSQUEDA,BAJA,SALIR};
 enum BUSQUEDA{TITULO=1,AUTOR,ANIO};
 void pausa(){
-    cout << "Presione enter para continuar...";
+    cout << "\nPresione enter para continuar...";
     cin.ignore();
     while(cin.get()!='\n');
     std::system("clear");
@@ -24,7 +22,7 @@ bool leerSN(){
 short menu(){
     short opc;
     std::system("clear");
-    cout << "1- Alta\n2- Búsqueda\n3- Baja\n4- Salir\nIngrese una opción: ";
+    cout << "\t\tAdministrador de Libros\n1- Alta\n2- Búsqueda\n3- Baja\n4- Guardar y salir\nIngrese una opción: ";
     cin >> opc;
     return opc;
 }
@@ -46,7 +44,7 @@ void menuAlta(cLista& lista){
     lista.insertar(libro);
 }
 void menuBusqueda(cLista& libros){
-    short opc, anio;
+    short opc, anio, tamResultados;
     string criterio;
     std::vector<cLibro>resultados;
     std::system("clear");
@@ -73,9 +71,10 @@ void menuBusqueda(cLista& libros){
         default:
             cout << "Ingrese una opción válida!\n";
     }
-    cout << "Hubo un total de " << resultados.size() << " resultados, ¿Desea verlos? (S/N)";
+    tamResultados = resultados.size();
+    cout << "Hubo un total de " << tamResultados << " resultados, ¿Desea verlos? (S/N)";
     if(leerSN())
-        for(short i(0);i<resultados.size();++i)
+        for(short i(0);i<tamResultados;++i)
             cout << '\t' << i+1 << ":\n" << resultados[i] << '\n';
     else
         cout << "No se mostraron los resultados\n";
