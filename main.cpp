@@ -46,6 +46,7 @@ int main(int argc, char* argv[]){
                     menuBusqueda(libros);
                 break;
                 case BAJA:
+                    menuBaja(libros);
                 break;
                 case SALIR:
                     libros.guardar();
