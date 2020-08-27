@@ -43,6 +43,7 @@ class cLista{
     void buscarTitulo(std::vector<cLibro>&resultados,const string& titulo) const;
     void buscarAutor(std::vector<cLibro>&resultados,const string& autor) const;
     void buscarAnio(std::vector<cLibro>&resultados,const short& anio) const;
+    bool eliminar(const string& titulo) const;
 };
 void cLista::insertar(const cLibro& libro){
         if(cabeza != nullptr)
@@ -100,4 +101,14 @@ void cLista::buscarAnio(std::vector<cLibro>&resultados,const short& anio) const{
             resultados.push_back(pIt->lDato);
         pIt = pIt->siguiente;
     }
+}
+bool cLista::eliminar(const string& titulo) const{
+    cNodo* pIt = cabeza;
+    while(pIt != nullptr)
+        if(pIt->siguiente && pIt->siguiente->lDato.mostrarNombre() == titulo){
+            pIt->eliminarAdelante();
+            return true;
+        }else
+            pIt = pIt->siguiente;
+    return false;
 }
