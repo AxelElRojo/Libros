@@ -79,3 +79,17 @@ void menuBusqueda(cLista& libros){
     else
         cout << "No se mostraron los resultados\n";
 }
+void menuBaja(cLista& libros){
+    string nombre;
+    cout << "Introduzca el nombre del libro para dar de baja: ";
+    cin.ignore();
+    std::getline(cin, nombre);
+    cout << "¿Está seguro de querer eliminar el libro? (S/N) ";
+    if(leerSN())
+        if(libros.eliminar(nombre))
+            cout << "Libro eliminado correctamente\n";
+        else
+            cout << "No se encontró el libro\n";
+    else
+        cout << "No se eliminó nada\n";
+}
