@@ -1,6 +1,7 @@
 #pragma once
 #include <cctype>
 #include <cstdlib>
+#include <vector>
 #include "lista.hpp"
 using std::cin;
 using std::cout;
@@ -12,12 +13,27 @@ void pausa(){
     while(cin.get()!='\n');
     std::system("clear");
 }
+void carga(cLista& libros){
+    if(!libros.cargar()){
+        cout << "ADVERTENCIA: No se pudo encontrar el archivo de base de datos\n";
+        pausa();
+    }
+}
 bool leerSN(){
     char letra;
     do{
         letra = toupper(cin.get());
     }while(letra != 'S' || letra != 'N');
     return letra == 'S';
+}
+void mostrarResultados(const std::vector<cLibro>&resultados){
+    short tamResultados = resultados.size();
+    cout << "Hubo un total de " << tamResultados << " resultados, ¿Desea verlos? (S/N)";
+    if(leerSN())
+        for(short i(0);i<tamResultados;++i)
+            cout << '\t' << i+1 << ":\n" << resultados[i] << '\n';
+    else
+        cout << "No se mostraron los resultados\n";
 }
 short menu(){
     short opc;
@@ -44,7 +60,7 @@ void menuAlta(cLista& lista){
     lista.insertar(libro);
 }
 void menuBusqueda(cLista& libros){
-    short opc, anio, tamResultados;
+    short opc, anio;
     string criterio;
     std::vector<cLibro>resultados;
     std::system("clear");
@@ -71,13 +87,7 @@ void menuBusqueda(cLista& libros){
         default:
             cout << "Ingrese una opción válida!\n";
     }
-    tamResultados = resultados.size();
-    cout << "Hubo un total de " << tamResultados << " resultados, ¿Desea verlos? (S/N)";
-    if(leerSN())
-        for(short i(0);i<tamResultados;++i)
-            cout << '\t' << i+1 << ":\n" << resultados[i] << '\n';
-    else
-        cout << "No se mostraron los resultados\n";
+    mostrarResultados(resultados);
 }
 void menuBaja(cLista& libros){
     string nombre;
