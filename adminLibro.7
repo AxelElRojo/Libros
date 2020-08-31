@@ -8,8 +8,9 @@ adminLibro \- Administrador libros
 adminLibro [-a | -t | -h | RTFM] \- autor, título, ayuda y manual.
 
 .SH DESCRIPCIÓN
-Un programa sencillo que sirve para guardar, consultar y modificar
-datos de libros en una biblioteca o librería.
+Un programa sencillo que sirve para guardar, consultar y modificar datos de libros en una biblioteca o librería.
+Guarda los data en /var/db/LIBROS.db, este archivo es creado por el makefile y en caso de que sea eliminado o no se haya creado
+correctamente, el programa mostrará un mensaje de advertencia.
 
 .SH OPCIONES
 .IP "-a\tBúsqueda por autor."
