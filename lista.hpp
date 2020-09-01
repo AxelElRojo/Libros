@@ -33,7 +33,6 @@ class cLista{
         return lRetorno;
     }
     public:
-    cLista(const cLibro& libro):cabeza(new cNodo(libro)){}
     cLista():cabeza(nullptr){}
     ~cLista(){delete cabeza;}
     void insertar(const cLibro& libro);
