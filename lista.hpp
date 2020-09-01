@@ -70,9 +70,8 @@ bool cLista::cargar(){
 bool cLista::guardar(){
     std::ofstream fout("/var/db/LIBROS.db");
     if(fout.is_open()){
-        while(!estaVacia()){
+        while(!estaVacia())
             fout << eliminarInicio();
-        }
         fout.close();
         return true;
     }else
