@@ -65,7 +65,7 @@ void menuBusqueda(cLista& libros){
     string criterio;
     std::vector<cLibro>resultados;
     std::system("clear");
-    cout << "1- Búsqueda por título\n2- Búsqueda por Autor\n3- Buscar por año\nIngrese una opción: ";
+    cout << "1- Búsqueda por título\n2- Búsqueda por Autor\n3- Buscar por año\n4- Mostrar Todo\nIngrese una opción: ";
     cin >> opc;
     switch(opc){
         case TITULO:
