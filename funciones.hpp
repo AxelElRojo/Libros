@@ -22,16 +22,16 @@ void carga(cLista& libros){
 bool leerSN(){
     char letra;
     do{
-        letra = toupper(cin.get());
-    }while(letra != 'S' || letra != 'N');
-    return letra == 'S';
+        cin >> letra;
+    }while(!cin.fail() && letra!='s' && letra!='n');
+    return letra == 's';
 }
 void mostrarResultados(const std::vector<cLibro>&resultados){
     short tamResultados = resultados.size();
-    cout << "Hubo un total de " << tamResultados << " resultados, ¿Desea verlos? (S/N)";
+    cout << "Hubo un total de " << tamResultados << " resultados, ¿Desea verlos? (s/n): ";
     if(leerSN())
         for(short i(0);i<tamResultados;++i)
-            cout << '\t' << i+1 << ":\n" << resultados[i] << '\n';
+            cout << '\t' << i+1 << ":\n" << resultados[i].mostrarDatos() << '\n';
     else
         cout << "No se mostraron los resultados\n";
 }
@@ -94,7 +94,7 @@ void menuBaja(cLista& libros){
     cout << "Introduzca el nombre del libro para dar de baja: ";
     cin.ignore();
     std::getline(cin, nombre);
-    cout << "¿Está seguro de querer eliminar el libro? (S/N) ";
+    cout << "¿Está seguro de querer eliminar el libro? (s/n): ";
     if(leerSN())
         if(libros.eliminar(nombre))
             cout << "Libro eliminado correctamente\n";

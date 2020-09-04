@@ -41,14 +41,13 @@ string cLibro::mostrarDatos() const{
     return ss.str();
 }
 std::ostream& operator << (std::ostream& out, const cLibro& libro){
-    out << libro.anio << ' ' << libro.edicion << ' ' << libro.nombre << '|' << libro.autor << '\n';
+    out << libro.anio << ' ' << libro.edicion << ' ' << libro.nombre << '\n' << libro.autor << '\n';
     return out;
 }
 std::istream& operator >> (std::istream& in, cLibro& libro){
     in >> libro.anio >> libro.edicion;
     in.ignore();
-    std::getline(in,libro.nombre,'|');
-    in.ignore();
+    std::getline(in,libro.nombre);
     std::getline(in,libro.autor);
     return in;
 }
