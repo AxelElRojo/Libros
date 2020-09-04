@@ -86,7 +86,9 @@ void menuBusqueda(cLista& libros){
             libros.buscarAnio(resultados,anio);
         break;
         case TODO:
+            std::system("clear");
             cout << libros.listar();
+            return;
         break;
         default:
             cout << "Ingrese una opción válida!\n";
