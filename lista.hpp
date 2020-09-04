@@ -35,6 +35,7 @@ class cLista{
     public:
     cLista():cabeza(nullptr){}
     ~cLista(){delete cabeza;}
+    int tamano() const;
     void insertar(const cLibro& libro);
     bool estaVacia() const;
     bool cargar();
@@ -44,6 +45,11 @@ class cLista{
     void buscarAnio(std::vector<cLibro>&resultados,const short& anio) const;
     bool eliminar(const string& titulo);
 };
+int cLista::tamano() const{
+    int i;
+    for(cNodo* pIt=cabeza;pIt;++i,pIt=pIt->siguiente);
+    return i;
+}
 void cLista::insertar(const cLibro& libro){
         if(cabeza != nullptr)
             cabeza->insertarAdelante(libro);
