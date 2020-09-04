@@ -4,7 +4,7 @@ clean:
 	rm adminLibro
 install:
 	cp adminLibro /bin/adminLibro
-	touch /var/db/LIBROS.db
+	touch ~/.local/share/LIBROS.db
 	cp adminLibro /usr/local/man/man8/adminLibro.7
 	gzip /usr/local/man/man8/adminLibro.7
 uninstall:

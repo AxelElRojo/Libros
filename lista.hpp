@@ -54,7 +54,7 @@ bool cLista::estaVacia() const{
     return cabeza == nullptr;
 }
 bool cLista::cargar(){
-    std::ifstream fin("/var/db/LIBROS.db");
+    std::ifstream fin("~/.local/share/LIBROS.db");
     if(fin.is_open()){
         while(!fin.eof()){
             cLibro libro;
@@ -67,7 +67,7 @@ bool cLista::cargar(){
         return false;
 }
 bool cLista::guardar(){
-    std::ofstream fout("/var/db/LIBROS.db");
+    std::ofstream fout("~/.local/share/LIBROS.db");
     if(fout.is_open()){
         while(!estaVacia())
             fout << eliminarInicio();
