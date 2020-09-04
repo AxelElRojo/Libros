@@ -1,6 +1,7 @@
 #pragma once
 #include <fstream>
 #include <vector>
+#include <cstdlib>
 #include "libro.hpp"
 class cNodo{
     cLibro lDato;
@@ -60,7 +61,8 @@ bool cLista::estaVacia() const{
     return cabeza == nullptr;
 }
 bool cLista::cargar(){
-    std::ifstream fin("~/.local/share/LIBROS.db");
+    string homeDir = getenv("HOME");
+    std::ifstream fin(homeDir+"/.local/share/LIBROS.db");
     if(fin.is_open()){
         while(!fin.eof()){
             cLibro libro;
@@ -73,7 +75,8 @@ bool cLista::cargar(){
         return false;
 }
 bool cLista::guardar(){
-    std::ofstream fout("~/.local/share/LIBROS.db");
+    string homeDir = getenv("HOME");
+    std::ofstream fout(homeDir+"/.local/share/LIBROS.db");
     if(fout.is_open()){
         while(!estaVacia())
             fout << eliminarInicio();
