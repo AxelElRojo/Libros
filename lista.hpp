@@ -10,7 +10,10 @@ class cNodo{
     friend class cLista;
     cNodo(const cLibro& libro):lDato(libro),siguiente(nullptr){}
     cNodo():siguiente(nullptr){}
-    ~cNodo(){delete siguiente;}
+    ~cNodo(){
+        if(siguiente != nullptr)
+            delete siguiente;
+    }
     void insertarAdelante(const cLibro& libro);
     void eliminarAdelante();
 };
@@ -36,7 +39,6 @@ class cLista{
     }
     public:
     cLista():cabeza(nullptr){}
-    ~cLista(){delete cabeza;}
     int tamano() const;
     void insertar(const cLibro& libro);
     bool estaVacia() const;
