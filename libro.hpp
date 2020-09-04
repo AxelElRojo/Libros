@@ -36,8 +36,7 @@ short cLibro::mostrarAnio() const{
 }
 string cLibro::mostrarDatos() const{
     std::stringstream ss;
-    ss << "Nombre: " << this->nombre << "\nAutor: " << this->autor << '\n'
-       << "Año: " << this->anio << "\nEdición: " << this->edicion << '\n';
+    ss << '\t' << anio << '\t' << edicion << '\t' << autor << '\t' << nombre << '\n';
     return ss.str();
 }
 std::ostream& operator << (std::ostream& out, const cLibro& libro){

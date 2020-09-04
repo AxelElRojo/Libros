@@ -29,10 +29,11 @@ bool leerSN(){
 void mostrarResultados(const std::vector<cLibro>&resultados){
     short tamResultados = resultados.size();
     cout << "Hubo un total de " << tamResultados << " resultados, ¿Desea verlos? (s/n): ";
-    if(leerSN())
+    if(leerSN()){
+        cout << "\tAño\tEdición\tAutor\tNombre\n";
         for(short i(0);i<tamResultados;++i)
-            cout << '\t' << i+1 << ":\n" << resultados[i].mostrarDatos() << '\n';
-    else
+            cout << i+1 << ":\t" << resultados[i].mostrarDatos() << '\n';
+    }else
         cout << "No se mostraron los resultados\n";
 }
 short menu(){

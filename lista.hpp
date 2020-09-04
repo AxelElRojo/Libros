@@ -1,5 +1,6 @@
 #pragma once
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include <cstdlib>
@@ -52,6 +53,7 @@ class cLista{
     void buscarAutor(std::vector<cLibro>&resultados,const string& autor) const;
     void buscarAnio(std::vector<cLibro>&resultados,const short& anio) const;
     bool eliminar(const string& titulo);
+    string listar() const;
 };
 int cLista::tamano() const{
     int i;
@@ -125,4 +127,12 @@ bool cLista::eliminar(const string& titulo){
         }else
             pIt = pIt->siguiente;
     return false;
+}
+string cLista::listar() const{
+    std::stringstream ss;
+    short i=1;
+    ss << "#\tAño\tEdición\tAutor\tNombre\n";
+    for(cNodo* pIt = cabeza; pIt != nullptr; pIt = pIt->siguiente, i++)
+        ss << i << '\t' << pIt->lDato.mostrarDatos();
+    return ss.str();
 }
