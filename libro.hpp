@@ -36,7 +36,7 @@ short cLibro::mostrarAnio() const{
 }
 string cLibro::mostrarDatos() const{
     std::stringstream ss;
-    ss << '\t' << anio << '\t' << edicion << '\t' << autor << '\t' << nombre << '\n';
+    ss << anio << '\t' << edicion << '\t' << autor << "\t\t\t" << nombre << '\n';
     return ss.str();
 }
 std::ostream& operator << (std::ostream& out, const cLibro& libro){

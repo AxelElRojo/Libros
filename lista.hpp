@@ -131,8 +131,8 @@ bool cLista::eliminar(const string& titulo){
 string cLista::listar() const{
     std::stringstream ss;
     short i=1;
-    ss << "#\tAño\tEdición\tAutor\tNombre\n";
+    ss << "# Año\tEdición\tAutor\t\t\tNombre\n";
     for(cNodo* pIt = cabeza; pIt != nullptr; pIt = pIt->siguiente, i++)
-        ss << i << '\t' << pIt->lDato.mostrarDatos();
+        ss << i << ' ' << pIt->lDato.mostrarDatos();
     return ss.str();
 }
