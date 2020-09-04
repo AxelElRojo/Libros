@@ -3,8 +3,8 @@ adminLibro: main.cpp funciones.hpp lista.hpp libro.hpp
 clean:
 	rm adminLibro
 install:
-	cp adminLibro /bin/adminLibro
 	touch ~/.local/share/LIBROS.db
+	cp adminLibro /bin/adminLibro
 	cp adminLibro.7 /usr/local/man/man1/adminLibro.1
 	gzip /usr/local/man/man1/adminLibro.1
 uninstall:
