@@ -1,5 +1,6 @@
 #pragma once
 #include <fstream>
+#include <string>
 #include <vector>
 #include <cstdlib>
 #include "libro.hpp"
@@ -88,7 +89,7 @@ bool cLista::guardar(){
 void cLista::buscarTitulo(std::vector<cLibro>&resultados,const string& titulo) const{
     cNodo* pIt = cabeza;
     while (pIt != nullptr){
-        if(pIt->lDato.mostrarNombre() == titulo)
+        if(pIt->lDato.mostrarNombre().find(titulo) != string::npos)
             resultados.push_back(pIt->lDato);
         pIt = pIt->siguiente;
     }
@@ -96,7 +97,7 @@ void cLista::buscarTitulo(std::vector<cLibro>&resultados,const string& titulo) c
 void cLista::buscarAutor(std::vector<cLibro>&resultados,const string& autor) const{
     cNodo* pIt = cabeza;
     while (pIt != nullptr){
-        if(pIt->lDato.mostrarAutor() == autor)
+        if(pIt->lDato.mostrarAutor().find(autor) != string::npos)
             resultados.push_back(pIt->lDato);
         pIt = pIt->siguiente;
     }
