@@ -6,7 +6,7 @@
 using std::cin;
 using std::cout;
 enum OPCIONES{ALTA=1,BUSQUEDA,BAJA,SALIR};
-enum BUSQUEDA{TITULO=1,AUTOR,ANIO};
+enum BUSQUEDA{TITULO=1,AUTOR,ANIO,TODO};
 void pausa(){
     cout << "\nPresione enter para continuar...";
     cin.ignore();
@@ -84,6 +84,9 @@ void menuBusqueda(cLista& libros){
             cout << "Ingrese el año del libro: ";
             cin >> anio;
             libros.buscarAnio(resultados,anio);
+        break;
+        case TODO:
+            cout << libros.listar();
         break;
         default:
             cout << "Ingrese una opción válida!\n";
