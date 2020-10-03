@@ -15,10 +15,10 @@ class cNodo{
     void eliminarAdelante();
 };
 void cNodo::insertarAdelante(const cLibro& libro){
-    if(siguiente != nullptr)
-        siguiente->insertarAdelante(libro);
+    if(this->siguiente != nullptr)
+        this->siguiente->insertarAdelante(libro);
     else
-        siguiente = new cNodo(libro);
+        this->siguiente = new cNodo(libro);
 }
 void cNodo::eliminarAdelante(){
     cNodo* adelante = siguiente->siguiente;
@@ -61,11 +61,11 @@ int cLista::tamano() const{
     return i;
 }
 void cLista::insertar(const cLibro& libro){
-        if(cabeza != nullptr)
-            cabeza->insertarAdelante(libro);
-        else
-            cabeza = new cNodo(libro);
-    }
+    if(cabeza != nullptr)
+        cabeza->insertarAdelante(libro);
+    else
+        cabeza = new cNodo(libro);
+}
 bool cLista::estaVacia() const{
     return cabeza == nullptr;
 }
@@ -121,7 +121,7 @@ void cLista::buscarAnio(std::vector<cLibro>&resultados,const short& anio) const{
 bool cLista::eliminar(const string& titulo){
     cNodo* pIt = cabeza;
     while(pIt != nullptr)
-        if(pIt->siguiente && pIt->siguiente->lDato.mostrarNombre() == titulo){
+        if(pIt->siguiente && pIt->siguiente->lDato.mostrarNombre().find(titulo) != string::npos){
             pIt->eliminarAdelante();
             return true;
         }else

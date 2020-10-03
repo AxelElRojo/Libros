@@ -51,7 +51,6 @@ void menuAlta(cLista& lista){
     cin.ignore();
     std::getline(cin,nombre);
     cout << "Nombre del autor: ";
-    cin.ignore();
     std::getline(cin,autor);
     cout << "Edición: ";
     cin >> edicion;
