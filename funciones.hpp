@@ -28,13 +28,16 @@ bool leerSN(){
 }
 void mostrarResultados(const std::vector<cLibro>&resultados){
     short tamResultados = resultados.size();
-    cout << "Hubo un total de " << tamResultados << " resultados, ¿Desea verlos? (s/n): ";
-    if(leerSN()){
-        cout << "\tAño\tEdición\tAutor\t\tNombre\n";
-        for(short i(0);i<tamResultados;++i)
-            cout << i+1 << ":\t" << resultados[i].mostrarDatos() << '\n';
+    if(tamResultados){
+        cout << "Hubo un total de " << tamResultados << " resultados, ¿Desea verlos? (s/n): ";
+        if(leerSN()){
+            cout << "\tAño\tEdición\tAutor\t\tNombre\n";
+            for(short i(0);i<tamResultados;++i)
+                cout << i+1 << ":\t" << resultados[i].mostrarDatos() << '\n';
+        }else
+            cout << "No se mostraron los resultados\n";
     }else
-        cout << "No se mostraron los resultados\n";
+        cout << "No hubo resultados\n";
 }
 short menu(){
     short opc;
