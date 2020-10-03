@@ -10,7 +10,7 @@ public:
     cLibro(string nombre, string autor, short anio, short edicion){
         ponerDatos(nombre, autor, anio, edicion);
     }
-    cLibro():edicion(-1){}
+    cLibro():edicion(-1),nombre("Error"),autor("Error"){}
     void ponerDatos(string nombre, string autor, short anio, short edicion);
     string mostrarNombre() const;
     string mostrarAutor() const;

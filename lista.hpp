@@ -73,11 +73,9 @@ bool cLista::cargar(){
     string homeDir = getenv("HOME");
     std::ifstream fin(homeDir+"/.local/share/LIBROS.db");
     if(fin.is_open()){
-        while(!fin.eof()){
-            cLibro libro;
-            fin >> libro;
+        cLibro libro;
+        while(fin >> libro)
             insertar(libro);
-        }
         fin.close();
         return true;
     }else
@@ -105,7 +103,7 @@ void cLista::buscarTitulo(std::vector<cLibro>&resultados,const string& titulo) c
 void cLista::buscarAutor(std::vector<cLibro>&resultados,const string& autor) const{
     cNodo* pIt = cabeza;
     while (pIt != nullptr){
-        if(pIt->lDato.mostrarAutor().find(autor) != string::npos)
+        if(pIt->lDato.mostrarAutor().find(autor) != string::npos || pIt->lDato.mostrarNombre() == autor)
             resultados.push_back(pIt->lDato);
         pIt = pIt->siguiente;
     }
